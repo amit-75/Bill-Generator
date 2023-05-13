@@ -37,16 +37,3 @@ cur.execute('''
 
 conn.commit()
 conn.close()
-
-
-# '''
-# username
-# password
-# seller_name
-# mob_no
-# email
-# shop_name
-# address
-# register_date
-# '''
-# using above detail, create signup html template according to bill generator website
