@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bill Generator</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+	<header>
+		<h1>Bill Generator</h1>
+		<nav>
+			<ul>
+				{% if msg %}
+				<li><a href="/bill generator">Home</a></li>
+				<li><a href="/create_bill">Create Bill</a></li>
+				<li><a href="/my_sales">My Sales</a></li>
+				<li><a href="/profile">Profile</a></li>		
+				<li><a href="/logout">Logout</a></li>
+				{% else %}
+				<li><a href="/bill generator">Home</a></li>
+				<li><a href="/signin">Sign In</a></li>
+				<li><a href="/signup">Sign Up</a></li>
+				{% endif %}
+
+			</ul>
+		</nav>
+	</header>
+	{% block body %} {% endblock %}
+	<footer>
+		<p>Bill Generator &copy; 2023</p>
+	</footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+	<main>
+	  <h2>My Sales</h2>
+	  <table>
+	    <thead>
+	      <tr>
+	        <th>Date</th>
+	        <th>Customer Name</th>
+	        <th>Mobile No.</th>
+	        <th>Email</th>
+	        <th>Address</th>
+	        <th>Product Name</th>
+	        <th>Price</th>
+	        <th>Quantity</th>
+	        <th>Total Amount</th>
+	        <th>Print Bill</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {% for sale in sales_data %}
+	      <tr>
+	        <td>{{sale[10]}}</td>
+	        <td>{{sale[2]}}</td>
+	        <td>{{sale[3]}}</td>
+	        <td>{{sale[4]}}</td>
+	        <td>{{sale[5]}}</td>
+	        <td>{{sale[6]}}</td>
+	        <td>{{sale[8]}}</td>
+	        <td>{{sale[7]}}</td>
+	        <td>{{sale[9]}}</td>
+	        <td><a href="/printbill/{{sale[0]}}">Print</a></td>
+	      </tr>
+	      {% endfor %}
+	    </tbody>
+	  </table>
+	</main>
+
+{% endblock %}	

@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block body %}
+	<main>
+		<h1>Bill Generator</h1>
+  
+		<form action="/create_bill" method="POST">
+		<table>
+		  <tr>
+		    <th colspan="2">Customer Information</th>
+		  </tr>
+		  <tr>
+		    <td>Customer Name:</td>
+		    <td><input type="text" name="customer_name"></td>
+		  </tr>
+		  <tr>
+		    <td>Mobile:</td>
+		    <td><input type="text" name="cus_mob"></td>
+		  </tr>
+		  <tr>
+		    <td>Email:</td>
+		    <td><input type="email" name="cus_email"></td>
+		  </tr>
+		  <tr>
+		    <td>Address:</td>
+		    <td><textarea name="cus_address"></textarea></td>
+		  </tr>
+		  <tr>
+		    <th colspan="2">Product Information</th>
+		  </tr>
+		  <tr>
+		    <td>Product:</td>
+		    <td><input type="text" name="product"></td>
+		  </tr>
+		  <tr>
+		    <td>Quantity:</td>
+		    <td><input type="text" name="quantity"></td>
+		  </tr>
+		  <tr>
+		    <td>Price:</td>
+		    <td><input type="text" name="price"></td>
+		  </tr>
+		</table>
+
+		<br>
+
+		<input type="submit" value="Generate Bill">
+		</form>
+		
+	</main>
+{% endblock %}

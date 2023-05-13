@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block body %}
+	<main>
+		<div class="container">
+			<h2>What is Bill Generator?</h2>
+			<p>Bill Generator is a simple and easy-to-use web application that allows you to create, manage, and organize your bills. With Bill Generator, you can create professional-looking bills with ease, track your sales, and manage your customer data all in one place.</p><br><br>
+
+			<h2>How does it work?</h2>
+			<p>Simply sign up for a Bill Generator account and start creating your bills. You can customize your bills with your company logo, add customer information, and itemize your sales. Bill Generator will automatically calculate the totals for you, and you can save and download your bills as PDF files.</p><br><br>
+
+			<h2>Features</h2>
+			<ul>
+				<li>Create professional-looking bills with ease</li>
+				<li>Customize your bills with your company logo</li>
+				<li>Add customer information and itemize your sales</li>
+				<li>Track your sales and manage customer data</li>
+				<li>Save and download your bills as PDF files</li>
+			</ul><br><br>
+
+			<h2>Get Started</h2>
+			{% if msg %}
+			<p><a href="/create_bill">Create Bill</a></p>
+			{% else %}
+			<p><a href="/signup">Sign up</a> or <a href="/signin">sign in</a> to get started.</p>
+			{% endif %}
+		</div>
+	</main>
+{% endblock %}	

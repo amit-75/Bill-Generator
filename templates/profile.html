@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+	<main>
+		<div class="container">
+			<h2>Profile Information</h2>
+			<table>
+				<tbody>
+					<tr>
+						<td>Username</td>
+						<td>{{ data[0][0] }}</td>
+					</tr>
+					<tr>
+						<td>Seller Name</td>
+						<td>{{ data[0][1] }}</td>
+					</tr>
+					<tr>
+						<td>Mobile Number</td>
+						<td>{{ data[0][2] }}</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>{{ data[0][3] }}</td>
+					</tr>
+					<tr>
+						<td>Shop Name</td>
+						<td>{{ data[0][4] }}</td>
+					</tr>
+					<tr>
+						<td>Address</td>
+						<td>{{ data[0][5] }}</td>
+					</tr>
+					<tr>
+						<td>Registration Date</td>
+						<td>{{ data[0][6] }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+{% endblock %}	
