@@ -1,50 +1,173 @@
 {% extends "layout.html" %}
 {% block body %}
-	<main>
-		<h1>Bill Generator</h1>
-  
-		<form action="/create_bill" method="POST">
-		<table>
-		  <tr>
-		    <th colspan="2">Customer Information</th>
-		  </tr>
-		  <tr>
-		    <td>Customer Name:</td>
-		    <td><input type="text" name="customer_name"></td>
-		  </tr>
-		  <tr>
-		    <td>Mobile:</td>
-		    <td><input type="text" name="cus_mob"></td>
-		  </tr>
-		  <tr>
-		    <td>Email:</td>
-		    <td><input type="email" name="cus_email"></td>
-		  </tr>
-		  <tr>
-		    <td>Address:</td>
-		    <td><textarea name="cus_address"></textarea></td>
-		  </tr>
-		  <tr>
-		    <th colspan="2">Product Information</th>
-		  </tr>
-		  <tr>
-		    <td>Product:</td>
-		    <td><input type="text" name="product"></td>
-		  </tr>
-		  <tr>
-		    <td>Quantity:</td>
-		    <td><input type="text" name="quantity"></td>
-		  </tr>
-		  <tr>
-		    <td>Price:</td>
-		    <td><input type="text" name="price"></td>
-		  </tr>
-		</table>
+<main>
+    <h1>Bill Generator</h1>
+    {% with messages = get_flashed_messages() %}  
+      {% if messages %}  
+        {% for message in messages %}  
+            <p style="color: red">{{ message }}</p>  
+        {% endfor %}  
+      {% endif %}  
+    {% endwith %}
 
-		<br>
+    <form action="/create_bill" method="POST" id="billForm">
+        <div class="customer-info">
+            <h2>Customer Information</h2>
+            <div class="form-group">
+                <label for="customer_name">Customer Name:</label>
+                <input type="text" name="customer_name" id="customer_name" required>
+            </div>
+            <div class="form-group">
+                <label for="cus_mob">Mobile:</label>
+                <input type="text" name="cus_mob" id="cus_mob">
+            </div>
+            <div class="form-group">
+                <label for="cus_email">Email:</label>
+                <input type="email" name="cus_email" id="cus_email">
+            </div>
+            <div class="form-group">
+                <label for="cus_address">Address:</label>
+                <textarea name="cus_address" id="cus_address"></textarea>
+            </div>
+        </div>
 
-		<input type="submit" value="Generate Bill">
-		</form>
-		
-	</main>
+		<div class="product-info">
+            <h2>Product Information</h2>
+            <div id="product-container">
+                <!-- Headings for product details -->
+                <div class="product-headers">
+                    <div class="form-group">
+                        <label for="product">Product:</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label>Action</label>
+                    </div> -->
+                </div>
+
+                <!-- Product information fields in a single row -->
+                <div class="product-row">
+                    <div class="form-group">
+                        <input type="text" name="product" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="quantity" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="price" required>
+                    </div>
+                    <!-- <div class="form-group">
+                        <button type="button" class="delete-product">Delete</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- <button type="button" id="addProduct">Add Product</button> -->
+        <input type="submit" value="Generate Bill">
+    </form>
+</main>
+
+<style>
+    main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .product {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #addProduct {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+	.product-info {
+        max-height: 400px; /* Set a maximum height for the product section */
+        overflow-y: auto; /* Add vertical scroll if content overflows */
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+	.product-row {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        flex: 1;
+        margin-right: 10px;
+    }
+
+    .product-headers {
+        display: flex;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+    }
+
+    .delete-product {
+        background-color: #ff0000;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .delete-product:hover {
+        background-color: #cc0000;
+    }
+</style>
+
+<script>
+    document.getElementById("addProduct").addEventListener("click", function () {
+        const productContainer = document.getElementById("product-container");
+        const productRow = document.querySelector(".product-row").cloneNode(true);
+        const deleteButton = productRow.querySelector(".delete-product");
+        deleteButton.addEventListener("click", function () {
+            productContainer.removeChild(productRow);
+        });
+        productContainer.appendChild(productRow);
+    });
+</script>
 {% endblock %}

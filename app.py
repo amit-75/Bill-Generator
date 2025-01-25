@@ -2,6 +2,7 @@ from flask import *
 import datetime
 import sqlite3
 import database
+import re
 
 app = Flask(__name__)
 app.secret_key = 'asdf@75757'
@@ -22,6 +23,18 @@ def seller_data(email):
 	data = cur.fetchall()
 	return data
 
+def is_valid_email(email):
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+def is_valid_mobile_number(mobile_number):
+    if 6<= int(mobile_number[0]) <=9 and len(mobile_number)==10 :
+        return True
+    else:
+        return False
+
+
+# ********************************** Routes **********************************
 @app.route('/',methods=['GET','POST'])
 def index():
 	msg = False
@@ -44,6 +57,15 @@ def signup():
 			now = datetime.datetime.now()
 			current_time = now.strftime('%Y-%m-%d %H:%M:%S')
 			register_date = current_time
+
+			# check email or phone number is valid or not
+			if not is_valid_email(email):
+				flash("Invalid email......!")
+				return redirect(url_for("signup"))
+
+			if not is_valid_mobile_number(mob_no):
+				flash("Invalid mobile number...!")
+				return redirect(url_for("signup"))
 
 			conn = sqlite3.connect('Database.db')
 			cur = conn.cursor()
@@ -83,6 +105,15 @@ def create_bill():
 		quantity = request.form.get('quantity')
 		price = request.form.get('price')
 		totle_amount = (int(quantity) * float(price))
+
+		# check email or phone number is valid or not
+		if not is_valid_email(cus_email):
+			flash("Invalid email......!")
+			return redirect(url_for("create_bill"))
+
+		if not is_valid_mobile_number(cus_mob):
+			flash("Invalid mobile number...!")
+			return redirect(url_for("create_bill"))
 
 		email_in_session = session['email']
 		seller = seller_data(email_in_session)
@@ -156,4 +187,3 @@ def logout():
 
 if __name__ == ('__main__'):
 	app.run(debug=True)
-
